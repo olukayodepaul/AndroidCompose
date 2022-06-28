@@ -1,6 +1,6 @@
 package com.example.androidcompose.merrybelt.ui.home.home_ui.screen
 
-import androidx.compose.foundation.background
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -21,7 +21,7 @@ fun TransactionScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "TRANSACTION",
+            text = "",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
             color = Color.Black
