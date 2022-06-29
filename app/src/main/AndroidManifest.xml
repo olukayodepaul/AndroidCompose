@@ -13,14 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCompose"
         tools:targetApi="31">
-        <activity android:name=".merrybelt.ui.login.login_ui.MainActivity" />
         <activity
             android:name=".merrybelt.ui.home.home_ui.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_transfer"
+            android:theme="@style/Theme.AndroidCompose" />
+        <activity android:name=".merrybelt.ui.login.login_ui.MainActivity" />
+        <activity
+            android:name=".merrybelt.ui.home.trabsfer.transfer_presentation.TransferActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidCompose">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

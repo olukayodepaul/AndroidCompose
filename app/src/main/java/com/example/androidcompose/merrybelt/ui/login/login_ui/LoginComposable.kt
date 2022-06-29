@@ -45,6 +45,7 @@ object LoginComposable {
                         .fillMaxWidth()
                         .padding(top = 60.dp)
                 ) {
+
                     Image(
                         painterResource(id = R.drawable.mb1200x630),
                         modifier = Modifier

@@ -11,4 +11,12 @@ object Fonts {
         Font(R.font.roboto_regular, FontWeight.Bold)
     )
 
+    val RobotoBold = FontFamily(
+        Font(R.font.roboto_bold, FontWeight.Bold)
+    )
+
+    val Montserrat = FontFamily(
+        Font(R.font.opensansregular, FontWeight.Bold)
+    )
+
 }
