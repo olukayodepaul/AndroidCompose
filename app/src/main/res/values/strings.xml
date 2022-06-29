@@ -3,4 +3,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_main_activitys">MainActivitys</string>
     <string name="title_activity_transfer">TransferActivity</string>
+    <string name="title_activity_transfer_activity">TransferActivityActivity</string>
 </resources>

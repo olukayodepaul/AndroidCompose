@@ -1,63 +1,68 @@
 package com.example.androidcompose.merrybelt.util
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.sp
 import com.example.androidcompose.R
 import com.example.androidcompose.merrybelt.assets.Fonts
-import com.example.androidcompose.merrybelt.theme.Blues
-import com.example.androidcompose.merrybelt.theme.Borderline
-import com.example.androidcompose.merrybelt.theme.GreyTransparent
+import com.example.androidcompose.merrybelt.theme.*
+import com.example.androidcompose.merrybelt.ui.dto.Specimen
 
 object UtilCompose {
 
-    var isMutableStateOf by mutableStateOf("")
-
     @Composable
-    fun UtilSpaceInBetween(unitOfMeasure:Int){
+    fun UtilSpaceInBetween(unitOfMeasure: Int) {
         Spacer(modifier = Modifier.padding(bottom = unitOfMeasure.dp))
     }
 
     @Composable
-    fun InputWidget(title:String) {
+    fun InputWidget(title: String, leadingIcon:Int) {
         // Outlined Text Input Field
         UtilSpaceInBetween(5)
+        var isMutableStateOf by remember { mutableStateOf("") }
 
-        val bColor  = Borderline
+        val bColor = Borderline
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = isMutableStateOf,
-            onValueChange = { isMutableStateOf = it},
-            label = { Text(
-                text= title,
-                style = TextStyle(
-                    fontFamily = Fonts.Montserrat,
-                    color = Blues
+            onValueChange = { isMutableStateOf = it },
+            label = {
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        fontFamily = Fonts.Montserrat,
+                        color = Blues,
+                        fontSize = 18.sp
+                    )
                 )
-            )
             },
             maxLines = 1,
             shape = RoundedCornerShape(6.dp),
             leadingIcon = {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_business_center_24),
-                        contentDescription = title)
+                        painter = painterResource(id = isTransferLeadingIcon(leadingIcon)),
+                        contentDescription = title
+                    )
                 }
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -77,8 +82,123 @@ object UtilCompose {
     }
 
 
+    @Composable
+    fun SpecimenSpinners(specimens: List<Specimen>) {
 
+        UtilSpaceInBetween(5)
+
+        var specimenText by remember { mutableStateOf("") }
+        var expanded by remember { mutableStateOf(false) }
+        val bColor = Borderline
+
+
+        Box{
+                OutlinedTextField(
+                    value = (specimenText),
+                    onValueChange = { },
+                    label = {
+                        Text(
+                            text = "Select Bank",
+                            style = TextStyle(
+                                fontFamily = Fonts.Montserrat,
+                                color = Blues,
+                                fontSize = 18.sp
+                            )
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    trailingIcon = { Icon(Icons.Outlined.ArrowDropDown, null) },
+                    readOnly = true,
+                    shape = RoundedCornerShape(6.dp),
+                    leadingIcon = {
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_baseline_business_center_24),
+                                contentDescription = ""
+                            )
+                        }
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        backgroundColor = Color(
+                            bColor.red, bColor.green, bColor.blue,
+                            TextFieldDefaults.BackgroundOpacity
+                        ),
+                        focusedBorderColor = bColor,
+                        unfocusedBorderColor = Color(
+                            bColor.red, bColor.green, bColor.blue,
+                            TextFieldDefaults.UnfocusedIndicatorLineOpacity,
+                        ),
+                        focusedLabelColor = GreyTransparent,
+                        cursorColor = GreyTransparent
+                    ),
+                )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    Modifier.fillMaxWidth()
+                ) {
+                    specimens.forEach { specimen ->
+                        DropdownMenuItem(onClick = {
+                            expanded = false
+                            specimenText = specimen.toString()
+                        }) {
+                            Text(text = specimen.toString())
+                        }
+                    }
+                }
+                Spacer(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(Color.Transparent)
+                        .padding(10.dp)
+                        .clickable(
+                            onClick = { expanded = !expanded }
+                        )
+                )
+            }
+        }
+    }
+
+@Composable
+fun isTransferLeadingIcon(switchImage: Int):Int {
+    val drawables = arrayOf(
+        R.drawable.ic_baseline_domain_add_24, R.drawable.ic_baseline_business_center_24, R.drawable.ic_baseline_swap_horiz_24,
+        R.drawable.ic_baseline_payments_24, R.drawable.ic_baseline_payments_24,
+    )
+    return drawables[switchImage]
+}
+
+@Composable
+fun SubmitButton(isContent:String) {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MChild
+        ),
+
+        ) {
+        androidx.compose.material.Text(
+            text = isContent,
+            style = TextStyle(
+                color = White,
+                fontSize = 20.sp,
+                fontFamily = Fonts.MontserratBold
+            ),
+        )
+    }
+}
+
+
+@Composable
+fun ScaffoldWithTopBar() {
 
 }
+
+
+
+
+
 
 

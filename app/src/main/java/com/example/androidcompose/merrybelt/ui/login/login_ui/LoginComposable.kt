@@ -22,6 +22,7 @@ import com.example.androidcompose.merrybelt.assets.Fonts.MontserratBold
 import com.example.androidcompose.merrybelt.theme.MChild
 import com.example.androidcompose.merrybelt.theme.Menus
 import com.example.androidcompose.merrybelt.theme.White
+import com.example.androidcompose.merrybelt.util.SubmitButton
 
 
 object LoginComposable {
@@ -78,30 +79,6 @@ object LoginComposable {
     }
 
 
-
-    @Composable
-    fun SubmitButton(isContent:String) {
-        Button(
-            onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp, top = 20.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = MChild
-            ),
-
-        ) {
-            Text(
-                text = isContent,
-                style = TextStyle(
-                    color = White,
-                    fontSize = 20.sp,
-                    fontFamily = MontserratBold
-                ),
-            )
-        }
-    }
-    
     @Composable
     fun copyWrite(copyWriteYear:String){
         Box(modifier = Modifier.fillMaxSize()) {
