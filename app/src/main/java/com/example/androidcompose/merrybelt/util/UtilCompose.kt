@@ -26,12 +26,12 @@ import com.example.androidcompose.merrybelt.theme.GreyTransparent
 
 object UtilCompose {
 
+    var isMutableStateOf by mutableStateOf("")
+
     @Composable
     fun UtilSpaceInBetween(unitOfMeasure:Int){
         Spacer(modifier = Modifier.padding(bottom = unitOfMeasure.dp))
     }
-
-    var isMutableStateOf by mutableStateOf("")
 
     @Composable
     fun InputWidget(title:String) {

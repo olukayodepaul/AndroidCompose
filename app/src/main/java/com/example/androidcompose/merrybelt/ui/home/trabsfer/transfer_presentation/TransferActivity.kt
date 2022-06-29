@@ -49,15 +49,17 @@ class TransferActivity : ComponentActivity() {
                 ) {
                    Column(modifier = Modifier.padding(end = 20.dp, start = 20.dp)) {
                        UtilSpaceInBetween(20)
-                       InputWidget("Account Number")
-                       InputWidget("Account Name")
-                       InputWidget("Amount")
-                       InputWidget("Remark")
+                       Spinner()
                    }
                 }
             }
         }
     }
+}
+
+@Composable
+fun Spinner() {
+
 }
 
 
@@ -66,9 +68,6 @@ class TransferActivity : ComponentActivity() {
 fun DefaultPreview() {
     AndroidComposeTheme {
         UtilSpaceInBetween(20)
-        InputWidget("Account Number")
-        InputWidget("Account Name")
-        InputWidget("Amount")
-        InputWidget("Remark")
+
     }
 }
